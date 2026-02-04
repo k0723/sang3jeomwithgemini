@@ -69,3 +69,14 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
+
+  kafka:
+    image: wurstmeister/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "my-topic:1:1" # 토픽이름:파티션수:복제본수
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
